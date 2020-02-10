@@ -13,29 +13,22 @@ export class ChatServiceService {
     this.socket = io(this.url);
   }
 
-  public sendMessage778(message: string) {
-    this.socket.emit('new-message-778', message);
+  public sendMessage(message: Message) {
+    this.socket.emit('new-message', message);
   }
 
-  public sendMessage777(message: string) {
-    this.socket.emit('new-message-777', message);
-  }
-
-  public getMessages778() {
+  public getMessages() {
     return new Observable((observer) => {
-      this.socket.on('new-message-778', (message: string) => {
+      this.socket.on('new-message', (message: Message) => {
         observer.next(message);
-        console.log('LLEGO778');
       });
     });
   }
+}
 
-  public getMessages777() {
-    return new Observable((observer) => {
-      this.socket.on('new-message-777', (message: string) => {
-        observer.next(message);
-        console.log('LLEGO777');
-      });
-    });
-  }
+
+export interface Message {
+  emisor: string;
+  receptor: string;
+  message: string;
 }

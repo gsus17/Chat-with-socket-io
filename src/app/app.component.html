@@ -1,24 +1,50 @@
-<div *ngFor="let message of messagesTo778">
-  <span>Message to 778 {{message}}</span>
+<div class="operator-container">
+  <h2>Operador</h2>
+  <div *ngFor="let msg of messagesToOperator">
+    <span>Message from {{msg.emisor}} : {{msg.message}}</span>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+
+
+  <input #messageOperatorTo778 />
+  <button (click)="sendMessage('Operator', '778', messageOperatorTo778.value)">Send to 778</button>
+  <br>
+  <br>
+
+  <input #messageOperatorTo777 />
+  <button (click)="sendMessage('Operator', '777', messageOperatorTo777.value)">Send to 777</button>
 </div>
 
-<br>
-<br>
+<div class="conductor-container">
+  <h2>Conductor 778</h2>
+  <div *ngFor="let msg of messagesTo778">
+    <span>Message to {{msg.receptor}}:  {{msg.message}}</span>
+  </div>
 
-<div *ngFor="let message of messagesTo777">
-  <span>Message to 777 {{message}}</span>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <input #message778ToOperator />
+  <button (click)="sendMessage('778', 'Operator', message778ToOperator.value)">Send from 778 to operator</button>
 </div>
 
-<br>
-<br>
-<br>
-<br>
+<div class="conductor-container">
+  <h2>Conductor 777</h2>
 
-<input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage778()" />
-<button (click)="sendMessage778()">Send to 778</button>
+  <div *ngFor="let msg of messagesTo777">
+    <span>Message to {{msg.receptor}}:  {{msg.message}}</span>
+  </div>
 
-<br>
-<br>
+  <br>
+  <br>
+  <br>
+  <br>
 
-<input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage777()" />
-<button (click)="sendMessage777()">Send to 777</button>
+  <input #message777ToOperator />
+  <button (click)="sendMessage('777', 'Operator', message777ToOperator.value)">Send from 777 to operator</button>
+</div>

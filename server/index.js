@@ -12,14 +12,10 @@ io.on('connection', (socket) => {
   console.log('user connected');
 
   socket
-    .on('new-message-778', (message) => {
-      io.emit('new-message-778', message);
-      trasladaRequestProcess(message);
-    });
-  socket
-    .on('new-message-777', (message) => {
-      io.emit('new-message-777', message);
-      trasladaRequestProcess(message);
+    .on('new-message', (message) => {
+      console.log('message emit');
+      io.emit('new-message', message);
+      // trasladaRequestProcess(message);
     });
 });
 

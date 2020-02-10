@@ -1,0 +1,14 @@
+
+.operator-container {
+    padding: 16px;
+    border-radius: 3px;
+    border:solid 1px black;
+    margin: 16px;
+}
+
+.conductor-container {
+    padding: 16px;
+    border-radius: 3px;
+    border:solid 1px black;
+    margin: 16px;
+}

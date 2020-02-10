@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatServiceService } from './chat-service.service';
+import { ChatServiceService, Message } from './chat-service.service';
 
 @Component({
   selector: 'app-root',
@@ -7,34 +7,39 @@ import { ChatServiceService } from './chat-service.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'chat-research';
-  message = '';
-  messagesTo778: string[] = [];
-  messagesTo777: string[] = [];
+  messageOperatorTo778 = '';
+  messageOperatorTo777 = '';
+  message778ToOperator = '';
+  message777ToOperator = '';
+  messagesTo778: Message[] = [];
+  messagesTo777: Message[] = [];
+  messagesToOperator: Message[] = [];
   constructor(private chatService: ChatServiceService) {
 
   }
 
   public ngOnInit(): void {
     this.chatService
-      .getMessages778()
-      .subscribe((message: string) => {
-        this.messagesTo778.push(message);
-      });
-    this.chatService
-      .getMessages777()
-      .subscribe((message: string) => {
-        this.messagesTo777.push(message);
+      .getMessages()
+      .subscribe((message: Message) => {
+        if (message.receptor === '778') {
+          this.messagesTo778.push(message);
+        } else if (message.receptor === '777') {
+          this.messagesTo777.push(message);
+        } else if (message.receptor === 'Operator') {
+          this.messagesToOperator.push(message);
+        }
       });
   }
 
-  sendMessage778() {
-    this.chatService.sendMessage778(this.message);
-    this.message = '';
-  }
-  sendMessage777() {
-    this.chatService.sendMessage777(this.message);
-    this.message = '';
-  }
+  public sendMessage(emisor: string, receptor: string, message: string) {
+    const newMessage: Message = {
+      emisor,
+      receptor,
+      message
+    };
 
+    this.chatService.sendMessage(newMessage);
+    // this.message = '';
+  }
 }
